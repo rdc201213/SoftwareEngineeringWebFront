@@ -1,6 +1,7 @@
 # my-project
 
 ## Project setup
+依赖项：elementui，vuerouter，
 ```
 npm install
 ```
