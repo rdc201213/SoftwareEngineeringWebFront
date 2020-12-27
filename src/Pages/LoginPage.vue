@@ -176,7 +176,7 @@ export default {
 
 <style scoped>
 .login_container {
-  background-color: #2b4b6b;
+  background-image: linear-gradient(#f38237, #ffd1b6);
   height: 100%;
 }
 .login_box {
