@@ -15,14 +15,15 @@ export default {
     };
   },
 
-  mounted () {
+  mounted() {
     axios
-      .post('/api/getRandomHotel?city=上海&district=嘉定&province=上海')
-      .then(response => (this.items = response.data.member))
-      .catch(function (error) { // 请求失败处理
+      .post("/api/getRandomHotel?city=上海&district=嘉定&province=上海")
+      .then((response) => (this.items = response.data.member))
+      .catch(function (error) {
+        // 请求失败处理
         console.log(error);
       });
-  }
+  },
 };
 </script>
 

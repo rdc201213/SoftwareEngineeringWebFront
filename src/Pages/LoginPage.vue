@@ -1,5 +1,8 @@
 <template>
   <div class="login_container">
+    <div>
+      <TopBar />
+    </div>
     <div class="login_box">
       <div class="avatar_box">
         <img class="img" src="../assets/logo.png" alt="" />
@@ -17,8 +20,11 @@
           <el-input v-model="loginInfo.username"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input :type="passwordVisible" v-model="loginInfo.password">
-            <i slot="suffix" :class="icon" @click="showPass"></i>
+          <el-input
+            :type="passwordVisible"
+            v-model="loginInfo.password"
+            show-password
+          >
           </el-input>
         </el-form-item>
         <el-form-item>
@@ -32,7 +38,7 @@
     <el-dialog
       title="注册"
       :visible.sync="RegisterFormVisible"
-      :rules="registerRules"
+      :rules="rules"
       label-width="120px"
       status-icon
     >
@@ -44,7 +50,7 @@
         label-width="100px"
         class="demo-ruleForm"
       >
-      <el-form-item label="用户名" prop="userName">
+        <el-form-item label="用户名" prop="userName">
           <el-input v-model.number="ruleForm.userName"></el-input>
         </el-form-item>
         <el-form-item label="电话号码" prop="phoneNum">
@@ -55,6 +61,7 @@
             type="password"
             v-model="ruleForm.pass"
             autocomplete="off"
+            show-password
           ></el-input>
         </el-form-item>
         <el-form-item label="确认密码" prop="checkPass">
@@ -62,9 +69,10 @@
             type="password"
             v-model="ruleForm.checkPass"
             autocomplete="off"
+            show-password
           ></el-input>
         </el-form-item>
-        
+
         <el-form-item>
           <el-button type="primary" @click="submitRegisterForm('ruleForm')"
             >注册</el-button
@@ -77,12 +85,18 @@
 </template>
 
 <script>
+import TopBar from "../components/Basic/TopBar.vue";
+import axios from "axios";
 export default {
+  components: { TopBar },
   data() {
     var validatePass = (rule, value, callback) => {
       if (value === "") {
         callback(new Error("请输入密码"));
       } else {
+        if (value.length < 6) {
+          callback(new Error("密码长度需要大于6位"));
+        }
         if (this.ruleForm.checkPass !== "") {
           this.$refs.ruleForm.validateField("checkPass");
         }
@@ -118,7 +132,7 @@ export default {
         pass: "",
         checkPass: "",
         userName: "",
-        phoneNum:"",
+        phoneNum: "",
       },
       rules: {
         pass: [{ required: true, validator: validatePass, trigger: "blur" }],
@@ -135,31 +149,61 @@ export default {
     };
   },
   methods: {
-    showPass() {
-      if (this.passwordVisible === "text") {
-        this.passwordVisible = "password";
-        //更换图标
-        this.icon = "el-icon-view";
-      } else {
-        this.passwordVisible = "text";
-        this.icon = "el-icon-lock";
-      }
-    },
     login(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert("注册成功!");
+          axios
+            .post("/api/login", null, {
+              params: {
+                userName: this.loginInfo.username,
+                password: this.loginInfo.password,
+              },
+            })
+            .then((response) => {
+              if (response.status == 200) {
+                if (response.data == "用户名或密码错误") {
+                  alert("用户名或密码错误");
+                } else {
+                  alert("登录成功");
+                  sessionStorage.setItem("userID", response.data.userID);
+                  sessionStorage.setItem("userName", response.data.userName);
+                  this.$router.push("/home");
+                }
+              }
+            })
+            .catc((error) => {
+              console.log(error);
+              alert("网络似乎出现问题");
+              this.$router.push("/Login");
+            });
         } else {
           console.log("error submit!!");
           return false;
         }
       });
     },
-    register() {},
     submitRegisterForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert("submit!");
+          axios
+            .post("/api/register", {
+              userID: 1,
+              password: this.ruleForm.pass,
+              userName: this.ruleForm.userName,
+              phoneNumber: this.ruleForm.phoneNum,
+            })
+            .then((response) => {
+              console.log(response);
+              alert("注册成功!");
+              // sessionStorage.setItem("userID", response.data.userID);
+              // sessionStorage.setItem("userName", response.data.userName);
+              this.$router.push("/home");
+            })
+            .catch(function (error) {
+              // 请求失败处理
+              alert("注册失败!请重试");
+              console.log(error);
+            });
         } else {
           console.log("error submit!!");
           return false;
