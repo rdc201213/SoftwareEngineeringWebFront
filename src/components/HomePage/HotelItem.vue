@@ -62,44 +62,44 @@ export default {
   },
   methods: {
     handleSpecialService(specialServiceList) {
-      console.log(specialServiceList);
       var serviceList = specialServiceList.split("；");
-      console.log(serviceList);
       for (let service of serviceList) {
-        var temp = service.split("：", 2);
-        switch (temp[0]) {
+        var temp = service.split("：");
+        var first=temp.shift();
+        var rest=temp.join(':')
+        console.log(temp);
+        switch (first) {
           case "残疾人":
             this.specialServiceList.push({
               iconType: "iconfont iconcanjiren",
-              iconTitle: temp[0],
-              info: temp[1],
+              iconTitle: first,
+              info: rest,
             });
             break;
           case "婴幼儿":
             this.specialServiceList.push({
               iconType: "iconfont iconnaipingyingyoueryongpin",
-              iconTitle: temp[0],
-              info: temp[1],
+              iconTitle: first,
+              info: rest,
             });
             break;
           case "性少数":
             this.specialServiceList.push({
               iconType: "iconfont icontongxinglian",
-              iconTitle: temp[0],
-              info: temp[1],
+              iconTitle: first,
+              info: rest,
             });
             break;
           case "老年人":
             this.specialServiceList.push({
               iconType: "iconfont iconlaonianren",
-              iconTitle: temp[0],
-              info: temp[1],
+              iconTitle: first,
+              info: rest,
             });
             break;
           default:
             break;
         }
-        console.log(this.specialServiceList);
       }
     },
   },

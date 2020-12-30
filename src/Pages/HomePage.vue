@@ -25,8 +25,7 @@ export default {
 <style scoped>
 .homePageStyle {
   background: #ffd1b6;
-  height: auto;
-  width: auto;
+  width: 100%;
 }
 .searchContainer {
   background-image: linear-gradient(#f38237, #ffd1b6);

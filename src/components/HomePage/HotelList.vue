@@ -7,6 +7,8 @@
 <script>
 import HotelItem from "./HotelItem.vue";
 import axios from "axios";
+import eventBus from "@/eventBus.js";
+
 export default {
   components: { HotelItem },
   data() {
@@ -23,6 +25,7 @@ export default {
         // 请求失败处理
         console.log(error);
       });
+      eventBus.$on("info",(data)=>{this.items=data})
   },
 };
 </script>

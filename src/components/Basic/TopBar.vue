@@ -25,13 +25,20 @@ export default {
     return {
         navList:[
             {name:'/home', navItem:'首页'},
-            {name:'/home/classRoom',navItem:'我的班级'},
-            {name:'/home/course',navItem:'我的课程'},
-            {name:'/home/exam',navItem:'创建考试'},
             {name:'/Login',navItem:'登录/注册'},
         ]
                       
     }
+  },
+  mounted(){
+    if(sessionStorage.getItem("userID")!=null)
+    {
+      this.navList=[
+            {name:'/home', navItem:'首页'},
+            {name:'/UesrInformation',navItem:'个人中心'},
+        ]
+    }
+    
   },
   methods: {
   }

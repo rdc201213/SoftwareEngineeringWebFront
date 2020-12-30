@@ -194,7 +194,7 @@ export default {
             })
             .then((response) => {
               console.log(response);
-              alert("注册成功!");
+              alert(response.data);
               // sessionStorage.setItem("userID", response.data.userID);
               // sessionStorage.setItem("userName", response.data.userName);
               this.$router.push("/home");

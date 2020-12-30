@@ -50,13 +50,14 @@
         style="width: 360px"
       >
       </el-input>
-      <el-button type="warning">搜索</el-button>
+      <el-button type="warning" @click="search()">搜索</el-button>
     </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import eventBus from "@/eventBus.js";
 export default {
   data() {
     return {
@@ -70,6 +71,9 @@ export default {
       city: "",
       block: "",
       input: "",
+      provinceName: "",
+      cityName: "",
+      blockName: "",
     };
   },
   methods: {
@@ -135,10 +139,13 @@ export default {
     choseProvince: function (e) {
       for (var index2 in this.province) {
         if (e === this.province[index2].id) {
+          this.provinceName = this.province[index2].value;
           this.shi1 = this.province[index2].children;
           this.shi = this.province[index2].children[0].value;
+          this.cityName = this.province[index2].children[0].value;
           this.qu1 = this.province[index2].children[0].children;
           this.qu = this.province[index2].children[0].children[0].value;
+          this.blockName = this.province[index2].children[0].children[0].value;
           this.E = this.qu1[0].id;
         }
       }
@@ -147,8 +154,10 @@ export default {
     choseCity: function (e) {
       for (var index3 in this.city) {
         if (e === this.city[index3].id) {
+          this.cityName = this.city[index3].value;
           this.qu1 = this.city[index3].children;
           this.qu = this.city[index3].children[0].value;
+          this.blockName = this.city[index3].children[0].value;
           this.E = this.qu1[0].id;
           // console.log(this.E)
         }
@@ -156,8 +165,52 @@ export default {
     },
     // 选区
     choseBlock: function (e) {
-      this.E = e;
+      for (var index4 in this.block) {
+        if (e === this.block[index4].id) {
+          this.blockName = this.block[index4].value;
+          this.E = e;
+        }
+      }
       // console.log(this.E)
+    },
+    search() {
+      // if (this.input != "") {
+      axios
+        .post("/api/getHotelByAddress", null, {
+          params: {
+            province: this.provinceName,
+            city: this.cityName,
+            district: this.blockName,
+            hotelName: this.input,
+          },
+        })
+        .then((response) => {
+          if (response.status == 200) {
+            eventBus.$emit("info", response.data.member);
+            console.log(response.data.member)
+          }
+        })
+        .catch((erro) => {
+          console.log(erro);
+        });
+      // } else {
+      //   axios
+      //     .post("/api/getHotelByAddress", null, {
+      //       params: {
+      //         province: this.provinceName,
+      //         city: this.cityName,
+      //         district: this.blockName,
+      //       },
+      //     })
+      //     .then((response) => {
+      //       if (response.status == 200) {
+      //         eventBus.$emit("info", response.data.member);
+      //       }
+      //     })
+      //     .catch((erro) => {
+      //       console.log(erro);
+      //     });
+      // }
     },
   },
   created: function () {
@@ -174,7 +227,7 @@ export default {
   width: 80%;
   margin-top: 20px;
   margin-left: 140px;
-  float:left;
+  float: left;
 }
 .searchBox {
   margin-top: 70px;
