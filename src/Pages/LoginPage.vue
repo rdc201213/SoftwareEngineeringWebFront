@@ -165,8 +165,12 @@ export default {
                   alert("用户名或密码错误");
                 } else {
                   alert("登录成功");
+                  // 存入本地的信息之后需要修改
+                  sessionStorage.setItem("islogin", true);
                   sessionStorage.setItem("userID", response.data.userID);
                   sessionStorage.setItem("userName", response.data.userName);
+                  sessionStorage.setItem("password", response.data.password);
+                  sessionStorage.setItem("phoneNumber", response.data.phoneNumber);
                   this.$router.push("/home");
                 }
               }

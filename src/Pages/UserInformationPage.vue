@@ -1,3 +1,4 @@
+
 <template>
     <el-container style="background-color:#f5f7fa;">
       <div style="display:block;">
@@ -6,7 +7,7 @@
       <el-main style="overflow:unset;padding:0;">
         <el-form ref="newInfoForm" :model="newInfoForm" label-width="150px">
           <el-form-item label="头像">
-            <img src="../assets/logo.png" style="width:60px;height:60px;"></img>
+            <img src="../assets/logo.png" style="width:60px;height:60px;"/> 
           </el-form-item>
           <el-form-item label="用户ID">
             <el-input v-model="userID" style="width:250px" placeholder="" disabled></el-input>
