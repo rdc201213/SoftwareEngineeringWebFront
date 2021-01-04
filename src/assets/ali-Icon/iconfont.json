@@ -1,0 +1,37 @@
+{
+  "id": "2297621",
+  "name": "no name",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "5092034",
+      "name": "奶瓶&婴幼儿用品",
+      "font_class": "naipingyingyoueryongpin",
+      "unicode": "e717",
+      "unicode_decimal": 59159
+    },
+    {
+      "icon_id": "10257598",
+      "name": "老人日托",
+      "font_class": "weibiaoti--",
+      "unicode": "e622",
+      "unicode_decimal": 58914
+    },
+    {
+      "icon_id": "15186561",
+      "name": "同性恋",
+      "font_class": "tongxinglian",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "15921403",
+      "name": "残疾人",
+      "font_class": "canjiren",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    }
+  ]
+}
