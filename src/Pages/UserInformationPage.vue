@@ -21,7 +21,6 @@
           <el-form-item label="密码">
             <el-input type="password" v-model="password" style="width:250px" placeholder=""></el-input>
           </el-form-item>
-
         </el-form>
         <div style="margin-top:50px;margin-left:350px">
           <el-button type="primary" icon="" v-on:click="newInfo()" size="small">修改信息</el-button>

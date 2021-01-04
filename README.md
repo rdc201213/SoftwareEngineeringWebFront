@@ -1,7 +1,7 @@
 # my-project
 
 ## Project setup
-依赖项：elementui，vuerouter，
+依赖项：elementui，vuerouter，aliIcon,axios数据请求
 ```
 npm install
 ```

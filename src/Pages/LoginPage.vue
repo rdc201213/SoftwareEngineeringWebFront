@@ -169,7 +169,6 @@ export default {
                   sessionStorage.setItem("islogin", true);
                   sessionStorage.setItem("userID", response.data.userID);
                   sessionStorage.setItem("userName", response.data.userName);
-                  sessionStorage.setItem("password", response.data.password);
                   sessionStorage.setItem("phoneNumber", response.data.phoneNumber);
                   this.$router.push("/home");
                 }

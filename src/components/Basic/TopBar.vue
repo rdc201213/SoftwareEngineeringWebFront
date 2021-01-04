@@ -15,6 +15,11 @@
           <span> {{ item.navItem }}</span>
         </template>
       </el-menu-item>
+      <el-menu-item @click="logOut" v-if="isLogin()">
+       <template slot="title">
+          <span> 退出登录</span>
+        </template>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -36,11 +41,27 @@ export default {
       this.navList=[
             {name:'/home', navItem:'首页'},
             {name:'/UesrInformation',navItem:'个人中心'},
+            {name:'/',navItem:'发布房源'},
+            {name:'/OrderInformation',navItem:'我的订单'}
         ]
     }
     
   },
   methods: {
+    logOut(){
+      sessionStorage.clear();
+      location.reload();
+    },
+    isLogin()
+    {
+      if(sessionStorage.getItem("userID")!=null)
+      {
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
   }
 }
 </script>
