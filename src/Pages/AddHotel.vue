@@ -112,7 +112,7 @@ export default {
           axios
             .post("/api/viewMyHotel", null, {
               params: {
-                userID:173
+                userID:this.userID
               },
             })
             .then((response) => {
@@ -166,7 +166,7 @@ export default {
                     introduction:this.AddressInfo.introduction, 
                     hotelName:this.AddressInfo.hotelName, 
                     specialService:this.AddressInfo.specialService,
-                    userID:172
+                    userID:this.userID
                 },
             }).then(res => {
               console.log('成功')
