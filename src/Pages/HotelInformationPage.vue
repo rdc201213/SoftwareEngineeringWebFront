@@ -170,9 +170,9 @@ export default {
             if (response.status == 200) {
               // alert("查询房间信息成功");
               this.rooms = response.data.member
-              console.log("this.rooms:"+this.rooms)
-              console.log("length of this.rooms:"+this.rooms.length)
-              console.log("this.rooms[0].roomType:"+this.rooms[0].roomType)
+              // console.log("this.rooms:"+this.rooms)
+              // console.log("length of this.rooms:"+this.rooms.length)
+              // console.log("this.rooms[0].roomType:"+this.rooms[0].roomType)
             }
           })
           .catch((error) => {

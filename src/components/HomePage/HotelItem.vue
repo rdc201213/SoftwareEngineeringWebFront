@@ -155,7 +155,7 @@ export default {
 }
 .addressInfoBox {
   height: 100%;
-  width: 150px;
+  width: 200px;
   padding: 30px;
   float: left;
 }

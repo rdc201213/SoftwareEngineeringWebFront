@@ -19,7 +19,7 @@ export default {
 
   mounted() {
     axios
-      .post("/api/getRandomHotel?city=上海&district=嘉定&province=上海")
+      .post("/api/getRandomHotel?city=上海市&district=嘉定区&province=上海市")
       .then((response) => (this.items = response.data.member))
       .catch(function (error) {
         // 请求失败处理
@@ -35,7 +35,7 @@ export default {
   width: 1200px;
   height: auto;
   float: left;
-  margin-left: 220px;
+  margin-left: 240px;
   background: white;
   border: 3px solid #eee;
   box-shadow: 0 0 10px black;

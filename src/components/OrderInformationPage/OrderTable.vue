@@ -10,28 +10,28 @@
         <el-table-column label="orderID" prop="orderID" sortable />
         <el-table-column label="hotelName" prop="hotelName" />
         <el-table-column label="roomType" prop="roomType" />
-        <el-table-column label="price" prop="price" sortable />
         <el-table-column label="inTime" prop="inTime" />
         <el-table-column label="outTime" prop="outTime" />
         <el-table-column
           prop="state"
           label="state"
+          width="100"
           :filters="[
-            { text: 'finish', value: 'finishi' },
-            { text: 'unfinishi', value: 'unfinishi' },
+            { text: 'finish', value: 'finish' },
+            { text: 'unfinish', value: 'unfinish' },
           ]"
           :filter-method="filterTag"
           filter-placement="bottom-end"
         >
           <template slot-scope="scope">
             <el-tag
-              :type="scope.row.tag === 'finishi' ? 'success' : 'warning'"
+              :type="scope.row.state === 'unfinish' ? 'warning' : 'success'"
               disable-transitions
               >{{ scope.row.state }}</el-tag
             >
           </template>
         </el-table-column>
-        <el-table-column label="option" prop="buttonState">
+        <el-table-column label="option" prop="buttonState" text-align='center'>
           <template slot-scope="scope">
             <el-button
               size="mini"
@@ -130,9 +130,9 @@ export default {
     caculateState() {
       for (let i = 0; i < this.tableData.length; i++) {
         console.log(this.tableData[i]);
-        if (moment(this.tableData[i].outTime).diff(this.today)) {
+        if (moment(this.tableData[i].outTime).diff(this.today)>0) {
           this.tableData[i].state = "unfinish";
-          this.tableData[i].buttonState = false;
+          this.tableData[i].buttonState = true;
         } else {
           this.tableData[i].state = "finish";
           this.tableData[i].buttonState = false;
