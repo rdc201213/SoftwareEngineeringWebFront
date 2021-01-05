@@ -1,14 +1,36 @@
 <template>
   <div class="orderContainer">
     <template>
-      <el-table :data="tableData" style="width: 100%" stripe>
-        <el-table-column label="orderID" prop="orderID" />
+      <el-table
+        :data="tableData"
+        style="width: 100%"
+        stripe
+        :default-sort="{ prop: 'orderID', order: 'descending' }"
+      >
+        <el-table-column label="orderID" prop="orderID" sortable />
         <el-table-column label="hotelName" prop="hotelName" />
         <el-table-column label="roomType" prop="roomType" />
-        <el-table-column label="price" prop="price" />
+        <el-table-column label="price" prop="price" sortable />
         <el-table-column label="inTime" prop="inTime" />
         <el-table-column label="outTime" prop="outTime" />
-        <el-table-column label="state" prop="state" />
+        <el-table-column
+          prop="state"
+          label="state"
+          :filters="[
+            { text: 'finish', value: 'finishi' },
+            { text: 'unfinishi', value: 'unfinishi' },
+          ]"
+          :filter-method="filterTag"
+          filter-placement="bottom-end"
+        >
+          <template slot-scope="scope">
+            <el-tag
+              :type="scope.row.tag === 'finishi' ? 'success' : 'warning'"
+              disable-transitions
+              >{{ scope.row.state }}</el-tag
+            >
+          </template>
+        </el-table-column>
         <el-table-column label="option" prop="buttonState">
           <template slot-scope="scope">
             <el-button
@@ -64,7 +86,9 @@
           v-model="remarkInfo"
         >
         </el-input>
-        <el-button type="primary" size="mini" @click="submitRemark">提交评论</el-button>
+        <el-button type="primary" size="mini" @click="submitRemark"
+          >提交评论</el-button
+        >
       </el-dialog>
     </template>
   </div>
@@ -138,6 +162,9 @@ export default {
         userID: sessionStorage.getItem("userID"),
         hotelID: this.targetID,
       });
+    },
+    filterTag(value, row) {
+      return row.state === value;
     },
   },
 };

@@ -32,9 +32,13 @@ export default {
 
 <style>
 .hotelListContainer {
-  width: 1440px;
+  width: 1200px;
   height: auto;
   float: left;
-  margin-left: 150px;
+  margin-left: 220px;
+  background: white;
+  border: 3px solid #eee;
+  box-shadow: 0 0 10px black;
+  padding: 20px;
 }
 </style>

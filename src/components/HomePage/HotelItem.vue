@@ -12,8 +12,9 @@
               hotelId: data.hotelID, // orderNum : this.searchData.orderNo
             },
           }"
-        >
-          {{ data.hotelName }}
+          ><h3>
+            {{ data.hotelName }}
+          </h3>
         </router-link>
         <el-rate
           v-model="data.star"
@@ -21,6 +22,7 @@
           show-score
           text-color="#ff9900"
           score-template="{value}"
+          v-if="data.star"
         >
         </el-rate>
       </div>
@@ -30,7 +32,7 @@
       <p>{{ data.introduction }}</p>
     </div>
     <div class="specialServiceBox">
-      <h3>特殊服务</h3>
+      <h3>特殊人群服务</h3>
       <el-popover
         placement="top-start"
         :title="service.iconTitle"
@@ -40,9 +42,13 @@
         v-for="service in specialServiceList"
         :key="service.iconType"
       >
-        <i :class="service.iconType" style="font-size: 40px" slot="reference"/>
-                <p>{{service.info}}</p>
+        <i :class="service.iconType" style="font-size: 40px" slot="reference" />
+        <p>{{ service.info }}</p>
       </el-popover>
+    </div>
+    <div class="addressInfoBox">
+      <h3>地理位置</h3>
+      <p>{{ data.province }}-{{ data.city }}-{{ data.district }}</p>
     </div>
   </div>
 </template>
@@ -65,9 +71,8 @@ export default {
       var serviceList = specialServiceList.split("；");
       for (let service of serviceList) {
         var temp = service.split("：");
-        var first=temp.shift();
-        var rest=temp.join(':')
-        console.log(temp);
+        var first = temp.shift();
+        var rest = temp.join(":");
         switch (first) {
           case "残疾人":
             this.specialServiceList.push({
@@ -108,12 +113,12 @@ export default {
 
 <style>
 .hotelItem {
-  height: 200px;
-  width: 1350px;
+  height: 260px;
+  width: 1200px;
   float: left;
   border: 3px solid #eee;
   box-shadow: 0 0 10px#ddd;
-  padding: 50px;
+  background: white;
 }
 .hotelPictrueBox {
   height: 150px;
@@ -131,19 +136,27 @@ export default {
 .hotelInfoBox {
   height: auto;
   width: auto;
+  text-align: center;
 }
 .nameContainer {
   float: left;
 }
 .hotelIntroBox {
   height: 100%;
-  width: 400px;
+  width: 300px;
   padding: 30px;
   float: left;
 }
 .specialServiceBox {
   height: 100%;
   width: 200px;
+  padding: 30px;
+  float: left;
+}
+.addressInfoBox {
+  height: 100%;
+  width: 150px;
+  padding: 30px;
   float: left;
 }
 </style>

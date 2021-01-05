@@ -174,7 +174,7 @@ export default {
                 }
               }
             })
-            .catc((error) => {
+            .catch((error) => {
               console.log(error);
               alert("网络似乎出现问题");
               this.$router.push("/Login");
@@ -198,8 +198,8 @@ export default {
             .then((response) => {
               console.log(response);
               alert(response.data);
-              // sessionStorage.setItem("userID", response.data.userID);
-              // sessionStorage.setItem("userName", response.data.userName);
+              sessionStorage.setItem("userID", response.data.userID);
+              sessionStorage.setItem("userName", response.data.userName);
               this.$router.push("/home");
             })
             .catch(function (error) {
