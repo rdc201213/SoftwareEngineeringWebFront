@@ -41,7 +41,7 @@ export default {
       this.navList=[
             {name:'/home', navItem:'首页'},
             {name:'/UesrInformation',navItem:'个人中心'},
-            {name:'/',navItem:'发布房源'},
+            {name:'/AddHotel',navItem:'发布房源'},
             {name:'/OrderInformation',navItem:'我的订单'}
         ]
     }

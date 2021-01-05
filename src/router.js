@@ -5,6 +5,7 @@ import HomePage from './Pages/HomePage.vue'
 import HotelInformationPage from './Pages/HotelInformationPage.vue'
 import UserInformationPage from './Pages/UserInformationPage.vue'
 import OrderInformationPage from './Pages/OrderInformationPage.vue'
+import AddHotel from './Pages/AddHotel.vue'
 
 
 Vue.use(Router)
@@ -34,7 +35,11 @@ var router=new Router(
             {
                 path:'/OrderInformation',
                 component:OrderInformationPage,
-            }
+            },
+            {
+                path:'/AddHotel',
+                component:AddHotel,
+            },
 
         ]
     }
