@@ -29,7 +29,9 @@
     </div>
     <div class="hotelIntroBox">
       <h3>简介</h3>
-      <p>{{ data.introduction }}</p>
+      <p>
+        {{ data.introduction }}
+      </p>
     </div>
     <div class="specialServiceBox">
       <h3>特殊人群服务</h3>
@@ -142,9 +144,13 @@ export default {
   float: left;
 }
 .hotelIntroBox {
-  height: 100%;
+  height: 100px;
   width: 300px;
   padding: 30px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
   float: left;
 }
 .specialServiceBox {

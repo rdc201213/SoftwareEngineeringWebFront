@@ -64,6 +64,7 @@
                 show-score
                 text-color="#ff9900"
                 score-template="{value}"
+                v-if="hotel.star"
               >
               </el-rate>
               <div class="detail-headline_address">
@@ -274,6 +275,7 @@ export default {
     position: relative;
     overflow: hidden;
     outline: 15px solid #f5f9ff;
+    overflow: auto;
 }
 .u-icon{
     font: 12px/1.5 Helvetica Neue,Helvetica,Arial,sans-serif;
