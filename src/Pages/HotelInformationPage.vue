@@ -44,7 +44,8 @@
                     type="daterange"
                     range-separator="至"
                     start-placeholder="开始日期"
-                    end-placeholder="结束日期">
+                    end-placeholder="结束日期"
+                    value-format="yyyy-MM-dd">
                   </el-date-picker>
                 </el-form-item>
               </el-form>
@@ -240,8 +241,8 @@ export default {
                     price:this.currentPrice,
                     userID:this.userID,
                     userName:this.userName,
-                    inTime:this.daterange[0].toString().substring(0,10),
-                    outTime:this.daterange[1].toString().substring(0,10),
+                    inTime:this.daterange[0],
+                    outTime:this.daterange[1],
                     phoneNumber:this.newOrderForm.phoneNumber,
                   },
                 })
@@ -256,7 +257,7 @@ export default {
                   console.log(error);
                   alert("提交订单信息失败");
                 });   
-              // console.log(this.daterange[0].toString().substring(0,10))
+              console.log(this.daterange)
               // console.log(typeof(this.daterange[1].toString().substring(0,10)))
         }else{
           alert("请先登录");
