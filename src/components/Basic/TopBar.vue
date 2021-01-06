@@ -8,7 +8,7 @@
       background-color="#fff"
       text-color="#333"
       active-text-color="#0084ff"
-      style="flex:1"
+      style="flex: 1"
     >
       <el-menu-item v-for="(item, i) in navList" :key="i" :index="item.name">
         <template slot="title">
@@ -16,7 +16,7 @@
         </template>
       </el-menu-item>
       <el-menu-item @click="logOut" v-if="isLogin()">
-       <template slot="title">
+        <template slot="title">
           <span> 退出登录</span>
         </template>
       </el-menu-item>
@@ -26,55 +26,54 @@
 
 <script>
 export default {
-    data() {
+  data() {
     return {
-        navList:[
-            {name:'/home', navItem:'首页'},
-            {name:'/Login',navItem:'登录/注册'},
-        ]
-                      
-    }
+      navList: [
+        { name: "/Home", navItem: "首页" },
+        { name: "/Login", navItem: "登录/注册" },
+      ],
+    };
   },
-  mounted(){
-    if(sessionStorage.getItem("userID")!=null)
-    {
-      this.navList=[
-            {name:'/home', navItem:'首页'},
-            {name:'/UesrInformation',navItem:'个人中心'},
-            {name:'/AddHotel',navItem:'发布房源'},
-            {name:'/OrderInformation',navItem:'我的订单'}
-        ]
+  mounted() {
+    if (sessionStorage.getItem("userID") != null) {
+      this.navList = [
+        { name: "/Home", navItem: "首页" },
+        { name: "/UesrInformation", navItem: "个人中心" },
+        { name: "/AddHotel", navItem: "发布房源" },
+        { name: "/OrderInformation", navItem: "我的订单" },
+      ];
     }
-    
   },
   methods: {
-    logOut(){
+    logOut() {
       sessionStorage.clear();
-      location.reload();
-    },
-    isLogin()
-    {
-      if(sessionStorage.getItem("userID")!=null)
-      {
-        return true;
+      console.log(location.hash)
+      if (location.hash != "#/Home") {
+        this.$router.push("/Home");
+      } else {
+        location.reload();
       }
-      else{
+    },
+    isLogin() {
+      if (sessionStorage.getItem("userID") != null) {
+        return true;
+      } else {
         return false;
       }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style>
-.el-menu-item{
+.el-menu-item {
   font-size: 18px !important;
 }
 .el-menu-item.is-active {
-    color: #ea5b2c !important;
-    font-size: 18px !important;
+  color: #ea5b2c !important;
+  font-size: 18px !important;
 }
-.el-menu--horizontal>.el-menu-item.is-active {
+.el-menu--horizontal > .el-menu-item.is-active {
   border-bottom: 2px solid #ea5b2c !important;
 }
 </style>

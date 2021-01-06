@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="pageStyle">
     <div style="display: block">
       <TopBar />
     </div>
-    <el-container class="main-contain">
+    <div class="main-contain">
       <el-main>
         <el-form
           ref="newInfoForm"
@@ -14,18 +14,13 @@
           <div class="center">
             <div class="col-main">
               <div class="user-info">
-                <div class="am-cf am-padding">
+                <!-- <div class="am-cf am-padding">
                   <div class="tt">
                     <strong class="am-text-danger am-text-lg">个人资料</strong>
                     /
                     <small>Personal&nbsp;information</small>
                   </div>
-                </div>
-                <div class="user-infoPic">
-                  <div class="filePic">
-                    <img class="circleImg" src="../assets/logo.png" />
-                  </div>
-                </div>
+                </div> -->
                 <div class="info-main" style="padding-bottom: 50px">
                   <el-form-item label="用户ID">
                     <el-input
@@ -73,7 +68,7 @@
           </div>
         </el-form>
       </el-main>
-    </el-container>
+    </div>
   </div>
 </template>
 
@@ -130,6 +125,7 @@ export default {
   margin: 0 auto;
   padding: 0;
   overflow: unset;
+  height: 100%;
 }
 .main-contain {
   background-image: linear-gradient(#f38237, #ffffff);
@@ -185,5 +181,15 @@ top: 50%;
 transform: translate(-50%,-50%); */
   background-color: azure;
   box-sizing: border-box;
+}
+.pageStyle {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(#f38237, #ffd1b6);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  float: left;
 }
 </style>

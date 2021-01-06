@@ -170,7 +170,7 @@ export default {
                   sessionStorage.setItem("userID", response.data.userID);
                   sessionStorage.setItem("userName", response.data.userName);
                   sessionStorage.setItem("phoneNumber", response.data.phoneNumber);
-                  this.$router.push("/home");
+                  this.$router.push("/Home");
                 }
               }
             })
@@ -198,9 +198,6 @@ export default {
             .then((response) => {
               console.log(response);
               alert(response.data);
-              sessionStorage.setItem("userID", response.data.userID);
-              sessionStorage.setItem("userName", response.data.userName);
-              this.$router.push("/home");
             })
             .catch(function (error) {
               // 请求失败处理
