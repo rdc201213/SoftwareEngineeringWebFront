@@ -104,7 +104,8 @@ export default {
       searchID:"",
       userID:"",
       userName:"",
-      hotelAddress:{}
+      hotelAddress:{
+      }
     };
     },
     mounted: function(){
@@ -117,8 +118,11 @@ export default {
             })
             .then((response) => {
               if (response.status == 200) {
-                this.hotelAddress = response.data.hotelAddress
-                console.log(response.data.hotelAddress)
+                console.log("response.data.hotelAddress:"+response.data.hotelAddress)
+                if(typeof(response.data.hotelAddress) == "undefined"){
+                }else{
+                  this.hotelAddress = response.data.hotelAddress
+                }
               }
             })
             .catch((error) => {
