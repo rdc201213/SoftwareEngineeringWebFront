@@ -169,8 +169,16 @@ export default {
                   sessionStorage.setItem("islogin", true);
                   sessionStorage.setItem("userID", response.data.userID);
                   sessionStorage.setItem("userName", response.data.userName);
-                  sessionStorage.setItem("phoneNumber", response.data.phoneNumber);
-                  this.$router.push("/Home");
+                  sessionStorage.setItem(
+                    "phoneNumber",
+                    response.data.phoneNumber
+                  );
+
+                  if (response.data.userName == "admin") {
+                    this.$router.push("/Management");
+                  } else {
+                    this.$router.push("/Home");
+                  }
                 }
               }
             })

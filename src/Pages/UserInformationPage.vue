@@ -3,72 +3,70 @@
     <div style="display: block">
       <TopBar />
     </div>
-    <div class="main-contain">
-      <el-main>
-        <el-form
-          ref="newInfoForm"
-          :model="newInfoForm"
-          label-width="150px"
-          class="form"
-        >
-          <div class="center">
-            <div class="col-main">
-              <div class="user-info">
-                <!-- <div class="am-cf am-padding">
+    <el-main>
+      <el-form
+        ref="newInfoForm"
+        :model="newInfoForm"
+        label-width="150px"
+        class="form"
+      >
+        <div class="center">
+          <div class="col-main">
+            <div class="user-info">
+              <!-- <div class="am-cf am-padding">
                   <div class="tt">
                     <strong class="am-text-danger am-text-lg">个人资料</strong>
                     /
                     <small>Personal&nbsp;information</small>
                   </div>
                 </div> -->
-                <div class="info-main" style="padding-bottom: 50px">
-                  <el-form-item label="用户ID">
-                    <el-input
-                      v-model="userID"
-                      style="width: 250px"
-                      placeholder=""
-                      disabled
-                    ></el-input>
-                  </el-form-item>
-                  <el-form-item label="手机号">
-                    <el-input
-                      v-model="phoneNumber"
-                      style="width: 250px"
-                      placeholder=""
-                      disabled
-                    ></el-input>
-                  </el-form-item>
-                  <el-form-item label="用户名">
-                    <el-input
-                      v-model="userName"
-                      style="width: 250px"
-                      placeholder=""
-                    ></el-input>
-                  </el-form-item>
-                  <el-form-item label="密码">
-                    <el-input
-                      type="password"
-                      v-model="password"
-                      style="width: 250px"
-                      placeholder=""
-                    ></el-input>
-                  </el-form-item>
-                  <div style="padding-left: 230px">
-                    <el-button
-                      type="primary"
-                      icon=""
-                      v-on:click="newInfo()"
-                      size="small"
-                      >修改信息</el-button
-                    >
-                  </div>
+              <div class="info-main" style="padding-bottom: 50px">
+                <el-form-item label="用户ID">
+                  <el-input
+                    v-model="userID"
+                    style="width: 250px"
+                    placeholder=""
+                    disabled
+                  ></el-input>
+                </el-form-item>
+                <el-form-item label="手机号">
+                  <el-input
+                    v-model="phoneNumber"
+                    style="width: 250px"
+                    placeholder=""
+                    disabled
+                  ></el-input>
+                </el-form-item>
+                <el-form-item label="用户名">
+                  <el-input
+                    v-model="userName"
+                    style="width: 250px"
+                    placeholder=""
+                  ></el-input>
+                </el-form-item>
+                <el-form-item label="密码">
+                  <el-input
+                    type="password"
+                    v-model="password"
+                    style="width: 250px"
+                    placeholder=""
+                  ></el-input>
+                </el-form-item>
+                <div style="padding-left: 230px">
+                  <el-button
+                    type="primary"
+                    icon=""
+                    v-on:click="newInfo()"
+                    size="small"
+                    >修改信息</el-button
+                  >
                 </div>
               </div>
             </div>
           </div>
-        </el-form>
-      </el-main>
-    </div>
+        </div>
+      </el-form>
+    </el-main>
   </div>
 </template>
 
@@ -127,9 +125,7 @@ export default {
   overflow: unset;
   height: 100%;
 }
-.main-contain {
-  background-image: linear-gradient(#f38237, #ffffff);
-}
+
 .user-info {
   width: 100%;
   max-width: 900px;
@@ -186,7 +182,7 @@ transform: translate(-50%,-50%); */
   position: relative;
   width: 100%;
   height: 100%;
-  background-image: linear-gradient(#f38237, #ffd1b6);
+  background-image: linear-gradient(#f38237, #ffffff);
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover;
