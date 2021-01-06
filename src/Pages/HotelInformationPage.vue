@@ -101,7 +101,21 @@
           </el-card>
         </div>
 
-
+        <el-tag style="margin-top:100px;font-size:24px;">评论</el-tag>
+        <div id="commentlist" v-for="(comment,index) in comments" :key="index">
+          <el-card class="box-card" style=" margin-top:4px;padding: 16px 24px 0;" >
+            <div class="detail-headline_container">
+              <div class="soloroom roomlist-baseroom-card" style="width:100%display:inline-block;float:left;padding-bottom: 22px;width:100%;border-right: 1px solid #dadfe6;">
+                <div class="roompanel" style="">
+                  <div class="roomtype" style="padding-top:20px;color:green;">用户名：</div>
+                  <div class="roomtype" style="font-size:22px;color:#409EFF;">{{comment.userName}}</div>
+                </div>
+              </div>
+              <div style="width:2400px;padding-left:50px;padding-top:20px;font-size:20px;flex:auto;display:block;flex-direction:row;justify-content: flex-end;">{{comment.commentContent}}。</div>
+              <div style="width:1000px;padding-top:120px;font-size:14px;flex:auto;display:block;flex-direction:row;justify-content: flex-end;color:grey;">发布时间：{{comment.commentTime}}</div>
+            </div>
+          </el-card>
+        </div>
 
       </el-main>
       <el-footer></el-footer>
@@ -115,9 +129,11 @@ export default {
   components: { TopBar },
   data(){
     return{
+      islogin:false,
       hotelId:"",
       hotel:{},
       rooms:{},
+      comments:{},
       userID:"1",
       userName:"小明",
       currentPrice:"1",
@@ -130,11 +146,13 @@ export default {
   },
   mounted: function () {
       this.hotelId = this.$route.query.hotelId
+      this.islogin = sessionStorage.getItem("islogin")
       this.userID = sessionStorage.getItem("userID")
       this.userName = sessionStorage.getItem("userName")
       console.log("this.hotelId:"+this.hotelId)
       this.hotelQuery()
       this.roomsQuery()
+      this.commentsQuery()
                   // 详情
       // {{$route.query}}
     },
@@ -157,14 +175,14 @@ export default {
           })
           .catch((error) => {
             console.log(error);
-            alert("网络似乎出现问题");
+            alert("暂无酒店信息");
           });   
       },
       roomsQuery(){
         axios
           .post("/api/getRoomByHotel", null, {
             params: {
-              hotelID: this.hotelId,
+              hotelID:this.hotelId,
             },
           })
           .then((response) => {
@@ -178,7 +196,33 @@ export default {
           })
           .catch((error) => {
             console.log(error);
-            alert("网络似乎出现问题");
+            alert("该酒店暂无房间信息");
+          });   
+      },
+      commentsQuery(){
+        var comments = ""
+        axios
+          .post("/api/getComment", null, {
+            params: {
+              hotelID:this.hotelId,
+            },
+          })
+          .then((response) => {
+            if (response.status == 200) {
+              // alert("查询评论信息成功");
+            comments = response.data.map( (comment) => {
+              return comment
+            })
+              this.comments = comments
+              console.log("this.comments:"+this.comments)
+              console.log("length of this.comments:"+this.comments.length)
+              console.log("this.comments[0].commentContent:"+this.comments[0].commentContent)
+              console.log("this.comments[0].userName:"+this.comments[0].userName)
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            alert("该酒店暂无评论信息");
           });   
       },
       close(){
@@ -186,38 +230,49 @@ export default {
         this.newOrderForm = {}
       },
       newOrder(){
-        axios
-          .post("/api/insertNewOrder", null, {
-            params: {
-              hotelID:this.hotelId,
-              hotelName:this.hotel.hotelName,
-              roomType:this.currentType,
-              price:this.currentPrice,
-              userID:this.userID,
-              userName:this.userName,
-              inTime:this.daterange[0].toString().substring(0,10),
-              outTime:this.daterange[1].toString().substring(0,10),
-              phoneNumber:this.newOrderForm.phoneNumber,
-            },
-          })
-          .then((response) => {
-            if (response.status == 200) {
-              alert("提交订单信息成功");
-              this.newOrderForm = {}
-              this.newOrderVisible = false
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-            alert("网络似乎出现问题");
-          });   
-        // console.log(this.daterange[0].toString().substring(0,10))
-        // console.log(typeof(this.daterange[1].toString().substring(0,10)))
+        if(sessionStorage.getItem("islogin") === "true"){
+              axios
+                .post("/api/insertNewOrder", null, {
+                  params: {
+                    hotelID:this.hotelId,
+                    hotelName:this.hotel.hotelName,
+                    roomType:this.currentType,
+                    price:this.currentPrice,
+                    userID:this.userID,
+                    userName:this.userName,
+                    inTime:this.daterange[0].toString().substring(0,10),
+                    outTime:this.daterange[1].toString().substring(0,10),
+                    phoneNumber:this.newOrderForm.phoneNumber,
+                  },
+                })
+                .then((response) => {
+                  if (response.status == 200) {
+                    alert("提交订单信息成功");
+                    this.newOrderForm = {}
+                    this.newOrderVisible = false
+                  }
+                })
+                .catch((error) => {
+                  console.log(error);
+                  alert("提交订单信息失败");
+                });   
+              // console.log(this.daterange[0].toString().substring(0,10))
+              // console.log(typeof(this.daterange[1].toString().substring(0,10)))
+        }else{
+          alert("请先登录");
+          this.$router.push("/Login")
+        }
+
       },
       addOrder(type, price){
-        this.currentType = type
-        this.currentPrice = price
-        this.newOrderVisible = true
+        if(sessionStorage.getItem("islogin") === "true"){
+          this.currentType = type
+          this.currentPrice = price
+          this.newOrderVisible = true
+        }else{
+          alert("请先登录");
+          this.$router.push("/Login")
+        }
       }
     }
 }
